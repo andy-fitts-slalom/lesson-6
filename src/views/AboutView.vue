@@ -1,31 +1,24 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
+import { useTheme } from 'vuetify'
 
-const theme = ref<'dark' | 'light'>('dark')
-
-const themeLabel = computed(() => (theme.value === 'dark' ? 'Light mode' : 'Dark mode'))
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
+const themeLabel = computed(() => (isDark.value ? 'Light mode' : 'Dark mode'))
 
 const toggleTheme = () => {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+  theme.global.name.value = isDark.value ? 'light' : 'dark'
 }
-
-watch(
-  theme,
-  (value) => {
-    document.body.dataset.theme = value
-  },
-  { immediate: true },
-)
 </script>
 
 <template>
   <main class="about-shell">
-    <article class="about-card">
+    <v-card class="about-card" max-width="760" rounded="xl" elevation="16">
       <header class="about-header">
-        <button class="theme-toggle" type="button" @click="toggleTheme" :aria-label="themeLabel">
-          <span class="toggle-icon">{{ theme === 'dark' ? '☀' : '☾' }}</span>
+        <v-btn color="surface-variant" variant="tonal" @click="toggleTheme" class="theme-toggle">
+          <v-icon :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'" start />
           {{ themeLabel }}
-        </button>
+        </v-btn>
 
         <nav class="page-nav" aria-label="Main navigation">
           <RouterLink to="/">Home</RouterLink>
@@ -100,7 +93,7 @@ watch(
 
         <p class="footer">Andy Fitts · Design, product, AI and the occasional song.</p>
       </div>
-    </article>
+    </v-card>
   </main>
 </template>
 
@@ -113,11 +106,9 @@ watch(
 }
 
 .about-card {
-  width: min(100%, 760px);
-  background: rgba(15, 23, 42, 0.82);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 28px;
-  box-shadow: 0 25px 70px rgba(2, 6, 23, 0.52);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 25px 70px var(--shadow);
   padding: 1.25rem 1.1rem 1.5rem;
 }
 
@@ -208,27 +199,8 @@ watch(
 }
 
 .theme-toggle {
-  align-self: flex-end;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(148, 163, 184, 0.12);
-  color: var(--text);
-  border-radius: 999px;
-  padding: 0.55rem 0.9rem;
-  font-size: 0.82rem;
+  min-width: 0;
   font-weight: 600;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.theme-toggle:hover {
-  transform: translateY(-1px);
-  background: rgba(148, 163, 184, 0.18);
-}
-
-.toggle-icon {
-  font-size: 1rem;
-  line-height: 1;
 }
 
 @media (max-width: 520px) {
