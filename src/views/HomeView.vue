@@ -7,8 +7,8 @@ const themeLabel = computed(() => (theme.value === 'dark' ? 'Light mode' : 'Dark
 
 const links = [
   { label: 'Portfolio', href: 'https://andyfitts.dev', icon: '↗', accent: 'portfolio' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com', icon: 'in', accent: 'linkedin' },
-  { label: 'Email', href: 'mailto:andy@fitts.dev', icon: '✉', accent: 'email' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/andyfitts', icon: 'in', accent: 'linkedin' },
+  { label: 'Email', href: 'mailto:andyfitts@gmail.com', icon: '✉', accent: 'email' },
 ]
 
 const toggleTheme = () => {
@@ -27,10 +27,17 @@ watch(
 <template>
   <main class="page-shell">
     <div class="card">
-      <button class="theme-toggle" type="button" @click="toggleTheme" :aria-label="themeLabel">
-        <span class="toggle-icon">{{ theme === 'dark' ? '☀' : '☾' }}</span>
-        {{ themeLabel }}
-      </button>
+      <div class="top-row">
+        <button class="theme-toggle" type="button" @click="toggleTheme" :aria-label="themeLabel">
+          <span class="toggle-icon">{{ theme === 'dark' ? '☀' : '☾' }}</span>
+          {{ themeLabel }}
+        </button>
+
+        <nav class="top-nav" aria-label="Main navigation">
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+        </nav>
+      </div>
 
       <div class="profile-ring">
         <div class="profile-photo">AF</div>
@@ -61,3 +68,32 @@ watch(
     </div>
   </main>
 </template>
+
+<style scoped>
+.top-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.top-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.84rem;
+}
+
+.top-nav a {
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.top-nav a:hover,
+.top-nav a.router-link-active {
+  opacity: 1;
+}
+</style>
