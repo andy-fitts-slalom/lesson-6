@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useTheme } from 'vuetify'
+import profilePhoto from '../assets/andy-fitts.jpg'
 import LinkButton from '../components/LinkButton.vue'
 import ProfileHeader from '../components/ProfileHeader.vue'
 
@@ -40,6 +41,7 @@ const toggleTheme = () => {
             initials="AF"
             name="Andy Fitts"
             tagline="Product-minded designer and developer building thoughtful digital experiences."
+            :photo-url="profilePhoto"
           />
 
           <nav class="d-flex flex-column ga-3 mt-6" aria-label="Social links">
