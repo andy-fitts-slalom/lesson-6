@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useTheme } from 'vuetify'
 import profilePhoto from '../assets/andy-fitts.jpg'
 import LinkButton from '../components/LinkButton.vue'
+import MainNavigation from '../components/MainNavigation.vue'
 import ProfileHeader from '../components/ProfileHeader.vue'
-
-const theme = useTheme()
-const isDark = computed(() => theme.global.current.value.dark)
-const themeLabel = computed(() => (isDark.value ? 'Light mode' : 'Dark mode'))
+import ThemeToggle from '../components/ThemeToggle.vue'
 
 const links = [
   { label: 'Portfolio', url: 'https://andyfitts.dev', icon: 'mdi-open-in-new' },
@@ -15,9 +11,6 @@ const links = [
   { label: 'Email', url: 'mailto:andyfitts@gmail.com', icon: 'mdi-email' },
 ]
 
-const toggleTheme = () => {
-  theme.change(isDark.value ? 'light' : 'dark')
-}
 </script>
 
 <template>
@@ -26,15 +19,8 @@ const toggleTheme = () => {
       <v-col cols="12" sm="10" md="7" lg="5" xl="4">
         <v-card class="mx-auto pa-6 pa-sm-8 text-center" max-width="480" rounded="xl" elevation="8">
           <header class="d-flex align-center justify-space-between ga-2 mb-6">
-            <v-btn color="surface-variant" variant="tonal" @click="toggleTheme">
-              <v-icon :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'" start />
-              {{ themeLabel }}
-            </v-btn>
-
-            <nav aria-label="Main navigation">
-              <v-btn to="/" variant="text">Home</v-btn>
-              <v-btn to="/about" variant="text">About</v-btn>
-            </nav>
+            <ThemeToggle />
+            <MainNavigation />
           </header>
 
           <ProfileHeader

@@ -1,29 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useTheme } from 'vuetify'
-
-const theme = useTheme()
-const isDark = computed(() => theme.global.current.value.dark)
-const themeLabel = computed(() => (isDark.value ? 'Light mode' : 'Dark mode'))
-
-const toggleTheme = () => {
-  theme.global.name.value = isDark.value ? 'light' : 'dark'
-}
+import MainNavigation from '../components/MainNavigation.vue'
+import ThemeToggle from '../components/ThemeToggle.vue'
 </script>
 
 <template>
   <main class="about-shell">
     <v-card class="about-card" max-width="760" rounded="xl" elevation="16">
       <header class="about-header">
-        <v-btn color="surface-variant" variant="tonal" @click="toggleTheme" class="theme-toggle">
-          <v-icon :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'" start />
-          {{ themeLabel }}
-        </v-btn>
-
-        <nav class="page-nav" aria-label="Main navigation">
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </nav>
+        <ThemeToggle />
+        <MainNavigation />
       </header>
 
       <div class="about-content">
@@ -120,25 +105,6 @@ const toggleTheme = () => {
   margin-bottom: 1.5rem;
 }
 
-.page-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  font-size: 0.88rem;
-}
-
-.page-nav a {
-  color: var(--text);
-  text-decoration: none;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-.page-nav a:hover,
-.page-nav a.router-link-active {
-  opacity: 1;
-}
-
 .about-content {
   color: var(--text);
   line-height: 1.75;
@@ -196,11 +162,6 @@ const toggleTheme = () => {
   margin-top: 1.5rem;
   font-size: 0.95rem;
   color: var(--muted);
-}
-
-.theme-toggle {
-  min-width: 0;
-  font-weight: 600;
 }
 
 @media (max-width: 520px) {
