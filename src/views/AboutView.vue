@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LinkButton from '../components/LinkButton.vue'
 import MainNavigation from '../components/MainNavigation.vue'
 import ThemeToggle from '../components/ThemeToggle.vue'
 </script>
@@ -69,11 +70,18 @@ import ThemeToggle from '../components/ThemeToggle.vue'
             I'm always glad to talk about UX, product strategy, design engineering or putting AI
             to work in real products.
           </p>
-          <p>
-            <a href="https://linkedin.com/in/andyfitts">Connect on LinkedIn</a>
-            <span>·</span>
-            <a href="mailto:andyfitts@gmail.com">andyfitts@gmail.com</a>
-          </p>
+          <nav class="d-flex flex-column ga-3 mt-4" aria-label="Contact links">
+            <LinkButton
+              label="LinkedIn"
+              url="https://www.linkedin.com/in/andyfitts"
+              icon="mdi-linkedin"
+            />
+            <LinkButton
+              label="Email"
+              url="mailto:andyfitts@gmail.com"
+              icon="mdi-email"
+            />
+          </nav>
         </div>
 
         <p class="footer">Andy Fitts · Design, product, AI and the occasional song.</p>
@@ -150,12 +158,6 @@ import ThemeToggle from '../components/ThemeToggle.vue'
 
 .contact-box h2 {
   margin-top: 0;
-}
-
-.contact-box a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
 }
 
 .footer {
