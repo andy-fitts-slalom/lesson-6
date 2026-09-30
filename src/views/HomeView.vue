@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useTheme } from 'vuetify'
+import LinkButton from '../components/LinkButton.vue'
 
 const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
 const themeLabel = computed(() => (isDark.value ? 'Light mode' : 'Dark mode'))
 
 const links = [
-  { label: 'Portfolio', href: 'https://andyfitts.dev', icon: 'mdi-open-in-new' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/andyfitts', icon: 'mdi-linkedin' },
-  { label: 'Email', href: 'mailto:andyfitts@gmail.com', icon: 'mdi-email' },
+  { label: 'Portfolio', url: 'https://andyfitts.dev', icon: 'mdi-open-in-new' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/andyfitts', icon: 'mdi-linkedin' },
+  { label: 'Email', url: 'mailto:andyfitts@gmail.com', icon: 'mdi-email' },
 ]
 
 const toggleTheme = () => {
@@ -45,20 +46,13 @@ const toggleTheme = () => {
           </p>
 
           <nav class="d-flex flex-column ga-3 mt-6" aria-label="Social links">
-            <v-btn
+            <LinkButton
               v-for="link in links"
               :key="link.label"
-              :href="link.href"
-              target="_blank"
-              rel="noreferrer"
-              size="large"
-              variant="tonal"
-              color="primary"
-              block
-            >
-              <v-icon :icon="link.icon" start size="small" />
-              {{ link.label }}
-            </v-btn>
+              :label="link.label"
+              :url="link.url"
+              :icon="link.icon"
+            />
           </nav>
         </v-card>
       </v-col>
