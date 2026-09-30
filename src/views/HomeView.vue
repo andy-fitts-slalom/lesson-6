@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 import LinkButton from '../components/LinkButton.vue'
+import ProfileHeader from '../components/ProfileHeader.vue'
 
 const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
@@ -35,15 +36,11 @@ const toggleTheme = () => {
             </nav>
           </header>
 
-          <v-avatar color="primary" size="112" class="mb-4">
-            <span class="text-h4 font-weight-bold">AF</span>
-          </v-avatar>
-
-          <p class="text-overline text-medium-emphasis mb-1">Hey, I’m</p>
-          <h1 class="text-h3 font-weight-bold mb-3">Andy Fitts</h1>
-          <p class="text-body-1 text-medium-emphasis mx-auto">
-            Product-minded designer and developer building thoughtful digital experiences.
-          </p>
+          <ProfileHeader
+            initials="AF"
+            name="Andy Fitts"
+            tagline="Product-minded designer and developer building thoughtful digital experiences."
+          />
 
           <nav class="d-flex flex-column ga-3 mt-6" aria-label="Social links">
             <LinkButton
